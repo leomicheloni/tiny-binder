@@ -1,12 +1,12 @@
-tiny-binder
-===========
+[tiny-binder]
+==================================================
 
 A little and light two way model binder for javascript.
 
 
-usage
+[usage]
 ===========
-
+```js
 require(["binder", "jquery"], function(Binder, $){	
 	var model = {	
 		nombre: "leonardo"
@@ -24,4 +24,4 @@ require(["binder", "jquery"], function(Binder, $){
 	document.bmodel.nombre("juan");
 
 });
-
+```
