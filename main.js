@@ -13,8 +13,9 @@ require(["binder", "jquery"], function(Binder, $){
 	
 	Binder.setUI("#ui");
 	Binder.bind();
-	Binder.onStateChange(function(data){
-		console.log(data);
+	
+	Binder.onStateChange(function(newmodel){
+		console.log(newmodel);
 	});
 	
 	document.bmodel.nombre("juan");
