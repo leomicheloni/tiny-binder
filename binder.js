@@ -1,20 +1,24 @@
-define(["jquery"], function($){
+(function (){ 
 	var Binder = function(){
 	};
 
 	Binder.prototype.model = null;
+
 	Binder.prototype.UI = null;
+
 	Binder.prototype.bmodel = {
 	};
+
 	Binder.prototype.onStateChangeHandler = null;
+
 	Binder.prototype.onStateChange = function(handler){
 		this.onStateChangeHandler = handler;
 	};
-	
+
 	Binder.prototype.stateChange = function(data){
 		if(this.onStateChangeHandler) this.onStateChangeHandler(data);
 	};
-	
+
 	Binder.prototype.setModel = function(model){
 		this.model = model;
 		var that = this;
@@ -38,11 +42,11 @@ define(["jquery"], function($){
 		
 		return this.bmodel;
 	};
-	
+
 	Binder.prototype.setUI = function(selector){
 		this.UI = $(selector);
 	};
-	
+
 	Binder.prototype.bind = function(){
 		var elements = $("[data-bind]");
 		var that = this;
@@ -54,10 +58,8 @@ define(["jquery"], function($){
 			$(item).val(value);
 		});
 	};
-	
-	/*Binder.prototype.getPropertyValue = function(name){
-		var value = model[name];
-	}*/
-	
-	return new Binder();
-});
+
+	if ( typeof define === "function" && define.amd ) {
+		define( "binder", [], function () { return Binder; } );
+	}
+}());

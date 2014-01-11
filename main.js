@@ -9,12 +9,14 @@ require(["binder", "jquery"], function(Binder, $){
 		nombre: "leonardo"
 	};
 
-	document.bmodel = Binder.setModel(model);
+	var binder = new Binder();
+
+	document.bmodel = binder.setModel(model);
 	
-	Binder.setUI("#ui");
-	Binder.bind();
+	binder.setUI("#ui");
+	binder.bind();
 	
-	Binder.onStateChange(function(newmodel){
+	binder.onStateChange(function(newmodel){
 		console.log(newmodel);
 	});
 	
