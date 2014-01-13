@@ -51,6 +51,13 @@
 		this.UI = $(selector);
 	};
 
+	Binder.prototype._trySetValue = function(item, value){
+		var $item = $(item);
+		$item.val(value);
+		if($item.val() === value) return;
+		$item.text(value);
+	};
+	
 	Binder.prototype.bind = function(){
 		var elements = $("[data-bind]");
 		var that = this;
@@ -59,7 +66,8 @@
 			var name = $(item).attr("data-bind");
 			
 			var value = that._model[name];
-			$(item).val(value);
+			//$(item).val(value);
+			that._trySetValue(item, value);
 		});
 	};
 
