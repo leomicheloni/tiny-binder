@@ -1,12 +1,16 @@
 (function (){ 
-	var Binder = function(){
+	
+	Binder = function(uiSelector){
+		if(uiSelector){
+			this.setUI(uiSelector);
+		}
 	};
 
-	Binder.prototype.model = null;
-
+	Binder.prototype._model = null,
+		
 	Binder.prototype.UI = null;
 
-	Binder.prototype.bmodel = {
+	Binder.prototype.model = {
 	};
 
 	Binder.prototype.onStateChangeHandler = null;
@@ -20,27 +24,27 @@
 	};
 
 	Binder.prototype.setModel = function(model){
-		this.model = model;
+		this._model = model;
 		var that = this;
-		for(var prop in this.model){
+		for(var prop in this._model){
 			var $element = $("[data-bind='" + prop + "']");
-			this.bmodel[prop] = function(value){
+			this.model[prop] = function(value){
 				if(value){
 					//update UI
 					$element.val(value);
 				}else{
-					return this.model[prop];
+					return this._model[prop];
 				}
 			};
 			
 			$element.blur(function(){
 				var value = $element.val();
-				that.model[prop] = value;
+				that._model[prop] = value;
 				that.stateChange({prop: prop, value: value});
 			});
 		}
 		
-		return this.bmodel;
+		return this.model;
 	};
 
 	Binder.prototype.setUI = function(selector){
@@ -54,7 +58,7 @@
 		elements.each(function(index, item){
 			var name = $(item).attr("data-bind");
 			
-			var value = that.model[name];
+			var value = that._model[name];
 			$(item).val(value);
 		});
 	};

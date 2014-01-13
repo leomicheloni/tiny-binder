@@ -1,26 +1,16 @@
-requirejs.config({
-	"paths": {
-		"jquery": "http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min",
-	}
-});
+$(function(){	
+	var binder = new Binder("#ui");
 
-require(["binder", "jquery"], function(Binder, $){	
-	var model = {	
+	var model = binder.setModel({	
 		nombre: "leonardo"
-	};
+	});
 
-	var binder = new Binder();
-
-	document.bmodel = binder.setModel(model);
-	
-	binder.setUI("#ui");
 	binder.bind();
-	
+
 	binder.onStateChange(function(newmodel){
 		console.log(newmodel);
 	});
+
+	model.nombre("juan");
+});	
 	
-	document.bmodel.nombre("juan");
-	
-	
-})
